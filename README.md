@@ -149,22 +149,27 @@ someFunctionWithABunchOfArguments(
 
 * **1.12** Prefer using local constants or other mitigation techniques to avoid multi-line predicates where possible.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 let firstCondition = x == firstReallyReallyLongPredicateFunction()
 let secondCondition = y == secondReallyReallyLongPredicateFunction()
 let thirdCondition = z == thirdReallyReallyLongPredicateFunction()
 if firstCondition && secondCondition && thirdCondition {
     // do something
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 if x == firstReallyReallyLongPredicateFunction()
     && y == secondReallyReallyLongPredicateFunction()
     && z == thirdReallyReallyLongPredicateFunction() {
     // do something
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 ## 2. Naming
 
@@ -189,9 +194,11 @@ class URLFinder {
 
 * **2.5** All constants other than singletons that are instance-independent should be `static`. All such `static` constants should be placed in a container `enum` type as per rule **3.1.16**. The naming of this container should be singular (e.g. `Constant` and not `Constants`) and it should be named such that it is relatively obvious that it is a constant container. If this is not obvious, you can add a `Constant` suffix to the name. You should use these containers to group constants that have similar or the same prefixes, suffixes and/or use cases.
 
-```swift
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 class MyClassName {
-    // PREFERRED
     enum AccessibilityIdentifier {
         static let pirateButton = "pirate_button"
     }
@@ -199,8 +206,10 @@ class MyClassName {
         static let indianaPi = 3
     }
     static let shared = MyClassName()
-
-    // NOT PREFERRED
+}
+</pre></td>
+<td><pre lang=swift>
+class MyClassName {
     static let kPirateButtonAccessibilityIdentifier = "pirate_button"
     enum SillyMath {
         static let indianaPi = 3
@@ -209,7 +218,10 @@ class MyClassName {
         static let shared = MyClassName()
     }
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **2.6** For generics and associated types, use either a single capital letter or a `PascalCase` word that describes the generic. If this word clashes with a protocol that it conforms to or a superclass that it subclasses, you can append a `Type` suffix to the associated type or generic name.
 
@@ -226,28 +238,34 @@ protocol Sequence {
 
 * **2.7** Names should be descriptive and unambiguous.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 class RoundAnimatingButton: UIButton { /* ... */ }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 class CustomButton: UIButton { /* ... */ }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **2.8** Do not abbreviate, use shortened names, or single letter names.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 class RoundAnimatingButton: UIButton {
     let animationDuration: NSTimeInterval
 
     func startAnimating() {
         let firstSubview = subviews.first
     }
-
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 class RoundAnimating: UIButton {
     let aniDur: NSTimeInterval
 
@@ -255,12 +273,17 @@ class RoundAnimating: UIButton {
         let v = subviews.first
     }
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **2.9** Include type information in constant or variable names when it is not obvious otherwise.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 class ConnectionTableViewCell: UITableViewCell {
     let personImageView: UIImageView
 
@@ -286,8 +309,8 @@ class ConnectionTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
 
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 class ConnectionTableViewCell: UITableViewCell {
     // this isn't a `UIImage`, so shouldn't be called image
     // use personImageView instead
@@ -324,7 +347,10 @@ class ConnectionTableViewCell: UITableViewCell {
     // for example, here, we should have `firstNameLabel` instead
     @IBOutlet weak var firstName: UILabel!
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **2.10** When naming function arguments, make sure that the function can be read easily to understand the purpose of each argument.
 
@@ -362,29 +388,41 @@ protocol InputTextViewProtocol {
 
 * **3.1.2** Prefer the composition of `map`, `filter`, `reduce`, etc. over iterating when transforming from one collection to another. Make sure to avoid using closures that have side effects when using these methods.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 let stringOfInts = [1, 2, 3].flatMap { String($0) }
 // ["1", "2", "3"]
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 var stringOfInts: [String] = []
 for integer in [1, 2, 3] {
     stringOfInts.append(String(integer))
 }
+</pre></td>
+</tr>
+<tr>
+</table>
 
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 let evenNumbers = [4, 8, 15, 16, 23, 42].filter { $0 % 2 == 0 }
 // [4, 8, 16, 42]
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 var evenNumbers: [Int] = []
 for integer in [4, 8, 15, 16, 23, 42] {
     if integer % 2 == 0 {
         evenNumbers.append(integer)
     }
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.1.3** Prefer not declaring types for constants or variables if they can be inferred anyway.
 
@@ -424,37 +462,52 @@ myFunctionWithEscapingClosure() { [weak self] (error) -> Void in
 
 * **3.1.8** Don't place parentheses around control flow predicates.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 if x == y {
     /* ... */
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 if (x == y) {
     /* ... */
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.1.9** Avoid writing out an `enum` type where possible - use shorthand.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 imageView.setImageWithURL(url, type: .person)
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 imageView.setImageWithURL(url, type: AsyncImageView.Type.person)
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.1.10** Don’t use shorthand for class methods since it is generally more difficult to infer the context from class methods as opposed to `enum`s.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 imageView.backgroundColor = UIColor.white
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 imageView.backgroundColor = .white
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.1.11** Prefer not writing `self.` unless it is required.
 
@@ -486,28 +539,38 @@ do {
 
 * **3.2.1** Write the access modifier keyword first if it is needed.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 private static let myPrivateNumber: Int
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 static private let myPrivateNumber: Int
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.2.2** The access modifier keyword should not be on a line by itself - keep it inline with what it is describing.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 open class Pirate {
     /* ... */
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 open
 class Pirate {
     /* ... */
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.2.3** In general, do not write the `internal` access modifier keyword since it is the default.
 
@@ -585,28 +648,38 @@ func handleDigit(_ digit: Int) throws {
 
 * **3.5.3** If you don't plan on actually using the value stored in an optional, but need to determine whether or not this value is `nil`, explicitly check this value against `nil` as opposed to using `if let` syntax.
 
-```swift
-// PREFERERED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 if someOptional != nil {
     // do something
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 if let _ = someOptional {
     // do something
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.5.4** Don't use `unowned`. You can think of `unowned` as somewhat of an equivalent of a `weak` property that is implicitly unwrapped (though `unowned` has slight performance improvements on account of completely ignoring reference counting). Since we don't ever want to have implicit unwraps, we similarly don't want `unowned` properties.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 weak var parentViewController: UIViewController?
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 weak var parentViewController: UIViewController!
 unowned var parentViewController: UIViewController
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.5.5** When unwrapping optionals, use the same name for the unwrapped constant or variable where appropriate.
 
@@ -811,8 +884,10 @@ In general, if a method can "fail", and the reason for the failure is not immedi
 
 * **3.11.1** In general, we prefer to use an "early return" strategy where applicable as opposed to nesting code in `if` statements. Using `guard` statements for this use-case is often helpful and can improve the readability of the code.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 func eatDoughnut(at index: Int) {
     guard index >= 0 && index < doughnuts.count else {
         // return early because the index is out of bounds
@@ -822,39 +897,46 @@ func eatDoughnut(at index: Int) {
     let doughnut = doughnuts[index]
     eat(doughnut)
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 func eatDoughnut(at index: Int) {
     if index >= 0 && index < doughnuts.count {
         let doughnut = doughnuts[index]
         eat(doughnut)
     }
 }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.11.2** When unwrapping optionals, prefer `guard` statements as opposed to `if` statements to decrease the amount of nested indentation in your code.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th><th>Bad</th></tr>
+<tr>
+<td><pre lang=swift>
 guard let monkeyIsland = monkeyIsland else {
     return
 }
 bookVacation(on: monkeyIsland)
 bragAboutVacation(at: monkeyIsland)
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 if let monkeyIsland = monkeyIsland {
     bookVacation(on: monkeyIsland)
     bragAboutVacation(at: monkeyIsland)
 }
-
-// EVEN LESS PREFERRED
+</pre></td>
+<td><pre lang=swift>
 if monkeyIsland == nil {
     return
 }
 bookVacation(on: monkeyIsland!)
 bragAboutVacation(at: monkeyIsland!)
-```
+</pre></td>
+</tr>
+</table>
 
 * **3.11.3** When deciding between using an `if` statement or a `guard` statement when unwrapping optionals is *not* involved, the most important thing to keep in mind is the readability of the code. There are many possible cases here, such as depending on two different booleans, a complicated logical statement involving multiple comparisons, etc., so in general, use your best judgement to write code that is readable and consistent. If you are unsure whether `guard` or `if` is more readable or they seem equally readable, prefer using `guard`.
 
@@ -877,22 +959,27 @@ guard !operationFailed else {
 
 * **3.11.4** If choosing between two different states, it makes more sense to use an `if` statement as opposed to a `guard` statement.
 
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 if isFriendly {
     print("Hello, nice to meet you!")
 } else {
     print("You have the manners of a beggar.")
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 guard isFriendly else {
     print("You have the manners of a beggar.")
     return
 }
 
 print("Hello, nice to meet you!")
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 * **3.11.5** You should also use `guard` only if a failure should result in exiting the current context. Below is an example in which it makes more sense to use two `if` statements instead of using two `guard`s - we have two unrelated conditions that should not block one another.
 
@@ -932,16 +1019,20 @@ guard let thingThree = thingThree else {
 
 * **3.11.7** Don’t use one-liners for `guard` statements.
 
-
-```swift
-// PREFERRED
+<table>
+<tr><th>Good</th><th>Not Good</th></tr>
+<tr>
+<td><pre lang=swift>
 guard let thingOne = thingOne else {
     return
 }
-
-// NOT PREFERRED
+</pre></td>
+<td><pre lang=swift>
 guard let thingOne = thingOne else { return }
-```
+</pre></td>
+</tr>
+<tr>
+</table>
 
 ## 4. Documentation/Comments
 
