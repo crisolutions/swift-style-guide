@@ -15,7 +15,7 @@ This guide was last updated for Swift 3.0 on January 14th, 2017.
         - [3.1 General](#31-general)
         - [3.2 Access Modifiers](#32-access-modifiers)
         - [3.3 Custom Operators](#33-custom-operators)
-        - [3.4 Switch Statements and `enum`s](#34-switch-statements-and-enums)
+        - [3.4 Switch Statements and `enums`](#34-switch-statements-and-enums)
         - [3.5 Optionals](#35-optionals)
         - [3.6 Protocols](#36-protocols)
         - [3.7 Properties](#37-properties)
@@ -494,7 +494,7 @@ imageView.setImageWithURL(url, type: AsyncImageView.Type.person)
 <tr>
 </table>
 
-* **3.1.10** Don’t use shorthand for class methods since it is generally more difficult to infer the context from class methods as opposed to `enum`s.
+* **3.1.10** Don’t use shorthand for class methods since it is generally more difficult to infer the context from class methods as opposed to `enums`.
 
 <table>
 <tr><th>Good</th><th>Not Good</th></tr>
@@ -596,7 +596,7 @@ If you want to introduce a custom operator, make sure that you have a *very* goo
 
 You can override existing operators to support new types (especially `==`). However, your new definitions must preserve the semantics of the operator. For example, `==` must always test equality and return a boolean.
 
-### 3.4 Switch Statements and `enum`s
+### 3.4 Switch Statements and `enums`
 
 * **3.4.1** When using a switch statement that has a finite set of possibilities (`enum`), do *NOT* include a `default` case. Instead, place unused cases at the bottom and use the `break` keyword to prevent execution.
 
