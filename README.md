@@ -104,9 +104,11 @@ func pancake(with syrup: Syrup) -> Pancake {
 
 ```swift
 // Xcode indentation for a function declaration that spans multiple lines
-func myFunctionWithManyParameters(parameterOne: String,
-                                  parameterTwo: String,
-                                  parameterThree: String) {
+func myFunctionWithManyParameters(
+    parameterOne: String,
+    parameterTwo: String,
+    parameterThree: String
+) {
     // Xcode indents to here for this kind of statement
     print("\(parameterOne) \(parameterTwo) \(parameterThree)")
 }
@@ -126,7 +128,8 @@ if myFirstValue > (mySecondValue + myThirdValue)
 someFunctionWithManyArguments(
     firstArgument: "Hello, I am a string",
     secondArgument: resultFromSomeFunction(),
-    thirdArgument: someOtherLocalProperty)
+    thirdArgument: someOtherLocalProperty
+)
 ```
 
 * **1.11** When dealing with an implicit array or dictionary large enough to warrant splitting it into multiple lines, treat the `[` and `]` as if they were braces in a method, `if` statement, etc. Closures in a method should be treated similarly.
@@ -144,7 +147,8 @@ someFunctionWithABunchOfArguments(
     ],
     someClosure: { parameter1 in
         print(parameter1)
-    })
+    }
+)
 ```
 
 * **1.12** Prefer using local constants or other mitigation techniques to avoid multi-line predicates where possible.
