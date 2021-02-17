@@ -122,7 +122,7 @@ if myFirstValue > (mySecondValue + myThirdValue)
 }
 ```
 
-* **1.10** When calling a function that has many parameters, put each argument on a separate line with a single extra indentation.
+* **1.10** When calling a function that has many parameters, put each argument on a separate line with a single indentation.
 
 ```swift
 someFunctionWithManyArguments(
@@ -792,16 +792,20 @@ let completionBlock: (() -> Void)? = nil
 
 ```swift
 // trailing closure
-doSomething(1.0) { (parameter1) in
+doSomething(for: 1.0) { (parameter1) in
     print("Parameter 1 is \(parameter1)")
 }
 
 // no trailing closure
-doSomething(1.0, success: { (parameter1) in
-    print("Success with \(parameter1)")
-}, failure: { (parameter1) in
-    print("Failure with \(parameter1)")
-})
+doSomething(
+    for: 1.0,
+    success: { (parameter1) in
+        print("Success with \(parameter1)")
+    },
+    failure: { (parameter1) in
+        print("Failure with \(parameter1)")
+    }
+)
 ```
 
 ### 3.9 Arrays
@@ -848,7 +852,12 @@ struct Error: Swift.Error {
     public let line: UInt
     public let message: String
 
-    public init(message: String, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
+    public init(
+        message: String,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: UInt = #line
+    ) {
         self.file = file
         self.function = function
         self.line = line
@@ -1111,16 +1120,18 @@ func myFunction() {
 
 * **4.2.1** Always leave a space after `//`.
 * **4.2.2** Always leave comments on their own line.
-* **4.2.3** When using `// MARK: - whatever`, leave a newline after the comment.
+* **4.2.3** When using `// MARK: - whatever`, leave two newlines after the comment.
 
 ```swift
 class Pirate {
 
     // MARK: - instance properties
+    
 
     private let pirateName: String
 
     // MARK: - initialization
+    
 
     init() {
         /* ... */
