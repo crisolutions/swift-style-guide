@@ -103,7 +103,13 @@ func pancake(with syrup: Syrup) -> Pancake {
 * **1.9** We follow Xcode's recommended indentation style (i.e. your code should not change if CTRL-I is pressed). When declaring a function that spans multiple lines, prefer using that syntax to which Xcode, as of version 7.3, defaults.
 
 ```swift
-// Xcode indentation for a function declaration that spans multiple lines
+// Xcode indentation for a function declaration that contains two parameters
+func myFunctionWithManyParameters(parameterOne: String, parameterTwo: String) {
+    // Xcode indents to here for this kind of statement
+    print("\(parameterOne) \(parameterTwo))")
+}
+
+// Xcode indentation for a function declaration that contains more than two parameters or legnth of function declaration is longer than 160 characters.
 func myFunctionWithManyParameters(
     parameterOne: String,
     parameterTwo: String,
@@ -125,6 +131,11 @@ if myFirstValue > (mySecondValue + myThirdValue)
 * **1.10** When calling a function that has many parameters, put each argument on a separate line with a single indentation.
 
 ```swift
+// Function with two or less parameters
+someFunctionWithManyArguments(firstArgument: "Hello, I am a string",
+                              secondArgument: resultFromSomeFunction())
+
+// Function with three or more parameters
 someFunctionWithManyArguments(
     firstArgument: "Hello, I am a string",
     secondArgument: resultFromSomeFunction(),
