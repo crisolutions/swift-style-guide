@@ -4,7 +4,7 @@ Make sure to read [Apple's API Design Guidelines](https://swift.org/documentatio
 
 Specifics from these guidelines + additional remarks are mentioned below.
 
-This guide was last updated for Swift 3.0 on January 14th, 2017.
+This guide was last updated for Swift 5.0 on Febuary 17th, 2021.
 
 ## Table Of Contents
 
@@ -103,10 +103,18 @@ func pancake(with syrup: Syrup) -> Pancake {
 * **1.9** We follow Xcode's recommended indentation style (i.e. your code should not change if CTRL-I is pressed). When declaring a function that spans multiple lines, prefer using that syntax to which Xcode, as of version 7.3, defaults.
 
 ```swift
-// Xcode indentation for a function declaration that spans multiple lines
-func myFunctionWithManyParameters(parameterOne: String,
-                                  parameterTwo: String,
-                                  parameterThree: String) {
+// Xcode indentation for a function declaration that contains two parameters
+func myFunctionWithManyParameters(parameterOne: String, parameterTwo: String) {
+    // Xcode indents to here for this kind of statement
+    print("\(parameterOne) \(parameterTwo))")
+}
+
+// Xcode indentation for a function declaration that contains more than two parameters or legnth of function declaration is longer than 160 characters.
+func myFunctionWithManyParameters(
+    parameterOne: String,
+    parameterTwo: String,
+    parameterThree: String
+) {
     // Xcode indents to here for this kind of statement
     print("\(parameterOne) \(parameterTwo) \(parameterThree)")
 }
@@ -120,13 +128,19 @@ if myFirstValue > (mySecondValue + myThirdValue)
 }
 ```
 
-* **1.10** When calling a function that has many parameters, put each argument on a separate line with a single extra indentation.
+* **1.10** When calling a function that has many parameters, put each argument on a separate line with a single indentation.
 
 ```swift
+// Function with two or less parameters
+someFunctionWithManyArguments(firstArgument: "Hello, I am a string",
+                              secondArgument: resultFromSomeFunction())
+
+// Function with three or more parameters
 someFunctionWithManyArguments(
     firstArgument: "Hello, I am a string",
     secondArgument: resultFromSomeFunction(),
-    thirdArgument: someOtherLocalProperty)
+    thirdArgument: someOtherLocalProperty
+)
 ```
 
 * **1.11** When dealing with an implicit array or dictionary large enough to warrant splitting it into multiple lines, treat the `[` and `]` as if they were braces in a method, `if` statement, etc. Closures in a method should be treated similarly.
@@ -144,7 +158,8 @@ someFunctionWithABunchOfArguments(
     ],
     someClosure: { parameter1 in
         print(parameter1)
-    })
+    }
+)
 ```
 
 * **1.12** Prefer using local constants or other mitigation techniques to avoid multi-line predicates where possible.
@@ -788,16 +803,20 @@ let completionBlock: (() -> Void)? = nil
 
 ```swift
 // trailing closure
-doSomething(1.0) { (parameter1) in
+doSomething(for: 1.0) { (parameter1) in
     print("Parameter 1 is \(parameter1)")
 }
 
 // no trailing closure
-doSomething(1.0, success: { (parameter1) in
-    print("Success with \(parameter1)")
-}, failure: { (parameter1) in
-    print("Failure with \(parameter1)")
-})
+doSomething(
+    for: 1.0,
+    success: { (parameter1) in
+        print("Success with \(parameter1)")
+    },
+    failure: { (parameter1) in
+        print("Failure with \(parameter1)")
+    }
+)
 ```
 
 ### 3.9 Arrays
@@ -844,7 +863,12 @@ struct Error: Swift.Error {
     public let line: UInt
     public let message: String
 
-    public init(message: String, file: StaticString = #file, function: StaticString = #function, line: UInt = #line) {
+    public init(
+        message: String,
+        file: StaticString = #file,
+        function: StaticString = #function,
+        line: UInt = #line
+    ) {
         self.file = file
         self.function = function
         self.line = line
@@ -1107,16 +1131,18 @@ func myFunction() {
 
 * **4.2.1** Always leave a space after `//`.
 * **4.2.2** Always leave comments on their own line.
-* **4.2.3** When using `// MARK: - whatever`, leave a newline after the comment.
+* **4.2.3** When using `// MARK: - whatever`, leave two newlines after the comment.
 
 ```swift
 class Pirate {
 
     // MARK: - instance properties
+    
 
     private let pirateName: String
 
     // MARK: - initialization
+    
 
     init() {
         /* ... */
